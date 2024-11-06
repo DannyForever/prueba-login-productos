@@ -1,11 +1,11 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" style="--padding-top: 56px;">
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-toolbar>
+        <ion-toolbar style="position: fixed; top: 0; left: 0; right: 0; z-index: 999;">
           <ion-buttons slot="start">
             <ion-icon name="chevron-back-outline"></ion-icon>
-            <ion-button>Salir</ion-button>
+            <ion-button routerLink="/">Salir</ion-button>
             <ion-title>Catálogo</ion-title>
           </ion-buttons>
         </ion-toolbar>
@@ -28,5 +28,9 @@
         </ion-list>
       </ion-col>
     </ion-row>
+    <!-- Scroll infinito -->
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando más productos..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </ion-grid>
 </ion-content>
