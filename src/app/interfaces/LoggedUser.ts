@@ -5,8 +5,6 @@ export interface LoggedUser {
     email: string,
     firstName: string;
     lastName: string;
-    gender: string;
-    image: string;
+    gender: 'male' | 'female'; // Restricción de valores
     accessToken: string;
-    refreshToken: string;
 }

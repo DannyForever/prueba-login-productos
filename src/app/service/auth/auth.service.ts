@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 // Importación de interfaces
 import { BodyLogin } from 'src/app/interfaces/BodyLogin';
 import { LoggedUser } from 'src/app/interfaces/LoggedUser';
+// Importación para observables
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ // Lo que se inyecta
   providedIn: 'root' /* Vive una vez, por lo que si se guarda una variable va a
@@ -17,6 +19,10 @@ export class AuthService {
   public loggedUser: LoggedUser | null = null; // Tipo usuario logueado o NULL. Inicia en NULL
 	public accessToken: string | null = null // Guardar Token
 
+  // Observador de carga
+  private $loading = new BehaviorSubject<boolean>(false);
+  public loading = this.$loading.asObservable();
+
   constructor(
     private http: HttpClient, // Variable HTTP para ocupar
   ) {
@@ -25,6 +31,7 @@ export class AuthService {
 
   // Método para iniciar sesión
   public loggingIn(user: string, pass: string){ // Recibe usuario y contraseña
+    this.$loading.next(true); // Cuando inicie se convierte en TRUE
     // Petición
     const body: BodyLogin = { // Lo que me exige
         username: user,
@@ -41,6 +48,7 @@ export class AuthService {
     .subscribe(result =>{
       this.loggedUser = result; // Que el usuario logueado sea igual al resultado
       this.accessToken = result.accessToken;
+      this.$loading.next(true); // Cuando termine se convierte en FALSE
       console.log(result);
     })
   }
