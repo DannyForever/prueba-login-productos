@@ -6,6 +6,8 @@ import { BodyLogin } from 'src/app/interfaces/BodyLogin';
 import { LoggedUser } from 'src/app/interfaces/LoggedUser';
 // Importación para observables
 import { BehaviorSubject } from 'rxjs';
+// Importación de Router
+import { Router } from '@angular/router';
 
 @Injectable({ // Lo que se inyecta
   providedIn: 'root' /* Vive una vez, por lo que si se guarda una variable va a
