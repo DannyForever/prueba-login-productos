@@ -27,6 +27,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient, // Variable HTTP para ocupar
+    private router: Router
   ) {
 
   }
@@ -52,6 +53,7 @@ export class AuthService {
       this.accessToken = result.accessToken;
       this.$loading.next(true); // Cuando termine se convierte en FALSE
       console.log(result);
+      this.router.navigate(['/', 'products'])
     })
   }
 
