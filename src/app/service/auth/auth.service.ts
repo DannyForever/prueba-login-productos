@@ -6,7 +6,7 @@ import { BodyLogin } from 'src/app/interfaces/BodyLogin';
 import { LoggedUser } from 'src/app/interfaces/LoggedUser';
 
 @Injectable({ // Lo que se inyecta
-  providedIn: 'root' /* Vive una vez, por lo que sì se guarda una variable va a
+  providedIn: 'root' /* Vive una vez, por lo que si se guarda una variable va a
                     poder ser accedida (restacada) desde cualquier aplicación */
 })
 export class AuthService {
@@ -43,5 +43,14 @@ export class AuthService {
       this.accessToken = result.accessToken;
       console.log(result);
     })
-}
+  }
+
+  // Método para cerrar sesión
+  public logOut(){
+    if(this.loggedUser){ // Si usuario logueado tiene un dato
+      this.loggedUser = null; // Vuelven a estar vacíos
+      this.accessToken = null;
+    }
+  }
+
 }
